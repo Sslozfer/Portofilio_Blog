@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+
+{% load static %}
+
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-i18n="title">Portfolio</title>
+  
+  <!-- CSS -->
+  <link rel="stylesheet" href="{% static 'styles.css' %}">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link rel="icon" type="image/x-icon" href="{% static 'assets/favicon.ico' %}">
+
+  
+  <style>
+    html { scroll-behavior: smooth; }
+  </style>
+</head>
+
+<body>
+
+    {% block content %}
+
+  <!-- Fondo animado -->
+  <div id="particles-js"></div>
+
+  <!-- HEADER: Navegacion -->
+  <header class="navbar">
+    <button id="menu-toggle" class="hamburger-btn" aria-label="Abrir menú">
+      <i class="fas fa-bars"></i>
+    </button>
+    <ul class="nav-links">
+      <li><a href="#sobre-mi" data-i18n="nav_about">Sobre mi</a></li>
+      <li><a href="#habilidades" data-i18n="nav_skills">Habilidades</a></li>
+      <li><a href="#proyectos" data-i18n="nav_projects">Proyectos</a></li>
+      <li><a href="/blog" data-i18n="nav_blog">Blog</a></li>
+      <li><a href="#contacto" data-i18n="nav_contact">Contacto</a></li>
+      
+      <!-- Selector de idioma -->
+      <li class="idioma-selector">
+        <button id="botonIdioma" data-i18n="language_button">🌐 Idioma</button>
+        <ul id="listaIdiomas" class="oculto">
+          <li data-lang="es">Español</li>
+          <li data-lang="en">English</li>
+          <li data-lang="zh">中文</li>
+        </ul>
+      </li>
+      
+      <!-- Toggle modo oscuro -->
+      <li>
+        <button id="toggleModo" aria-label="Toggle dark mode">
+          <i id="iconModo" class="fas fa-moon"></i>
+        </button>
+      </li>
+    </ul>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <main>
+    <!-- Seccion: Portada -->
+    <section id="portada" class="portada">
+      <div class="portada-contenido">
+        <h1 data-i18n="greeting">¡Hola, soy Santiago Lozano!</h1>
+        <p data-i18n="welcome">Bienvenido a mi portafolio</p>
+      </div>
+    </section>
+
+    <!-- Seccion: Sobre mi -->
+    <section id="sobre-mi" class="seccion">
+      <h2 data-i18n="about_title">Sobre mi</h2>
+      <p data-i18n="about_desc">
+        ¡Hola! Soy un desarrollador apasionado por la tecnologia y la creacion de soluciones innovadoras. 
+        Me encanta aprender y compartir lo que se.
+      </p>
+      <a href="{% static 'downloads/cv.pdf' %}" download class="boton-descarga" data-i18n="download_cv">Descargar CV</a>
+    </section>
+
+    <!-- Seccion: Habilidades tecnicas -->
+    <section id="habilidades" class="habilidades seccion">
+      <h2 data-i18n="skills_title">Habilidades Tecnicas</h2>
+      <div class="habilidades-grid">
+        <div class="habilidad">
+          <h3>Python</h3>
+          <i class="fab fa-python" style="color: #306998;"></i>
+          <p data-i18n="python_hours">+250 horas</p>
+        </div>
+        <div class="habilidad">
+          <h3>C++</h3>
+          <i class="fas fa-code" style="color: #00599C;"></i>
+          <p data-i18n="skills_cpp_hours">+80 horas</p>
+        </div>
+        <div class="habilidad">
+          <h3>C#</h3>
+          <i class="fas fa-gamepad" style="color: #512BD4;"></i>
+          <p data-i18n="skills_csharp_hours">+110 horas</p>
+        </div>
+        <div class="habilidad">
+          <h3>HTML</h3>
+          <i class="fab fa-html5" style="color: #e34c26;"></i>
+          <p data-i18n="skills_html_hours">+15 horas</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Seccion: Proyectos -->
+    <section id="proyectos" class="seccion">
+      <h2 data-i18n="projects_title">Proyectos</h2>
+      <div class="proyectos-grid">
+        <!-- Proyecto 1: Mapa de Terremotos -->
+        <div class="proyecto">
+          <h3 data-i18n="project_earthquake_map">Mapa de Terremotos</h3>
+          <img src="https://raw.githubusercontent.com/Sslozfer/Trabajo-1/ramita/parte%201/preview.jpg" 
+               alt="Mapa de Terremotos">
+          <p data-i18n="project_earthquake_desc">
+            Visualizacion interactiva de datos sismicos usando mapas.
+          </p>
+          <a href="https://github.com/Sslozfer/Trabajo-1/tree/ramita/parte%201" 
+             target="_blank" 
+             data-i18n="view_github">Ver en GitHub</a>
+        </div>
+
+        <!-- Proyecto 2: Estadisticas de GitHub -->
+        <div class="proyecto">
+          <h3 data-i18n="project_github_stats">Estadisticas de GitHub</h3>
+          <img src="https://raw.githubusercontent.com/Sslozfer/Trabajo-1/ramita/parte%202/preview.png" 
+               alt="Graficos de GitHub">
+          <p data-i18n="project_github_desc">
+            Pagina que muestra graficos sobre usuarios, repositorios y licencias.
+          </p>
+          <a href="https://github.com/Sslozfer/Trabajo-1/tree/ramita/parte%202" 
+             target="_blank" 
+             data-i18n="view_github">Ver en GitHub</a>
+        </div>
+
+        <!-- Proyecto 3: PvZ en Python -->
+        <div class="proyecto">
+          <h3 data-i18n="project_pvz">Plantas contra Zombies en Python</h3>
+          <img src="https://raw.githubusercontent.com/Sslozfer/pvz-python/main/Imagenes/preview.jpg" 
+               alt="Plantas contra Zombies en Python">
+          <p data-i18n="project_pvz_desc">
+            Un proyecto inspirado en el famoso juego PvZ, desarrollado desde cero en Python.
+          </p>
+          <a href="https://github.com/Sslozfer/pvz-python" 
+             target="_blank" 
+             data-i18n="view_github">Ver en GitHub</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Seccion: Contacto -->
+    <section id="contacto" class="seccion">
+      <h2 data-i18n="contact_title">Contacto</h2>
+      
+      <!-- Formulario de contacto -->
+      <form action="https://formspree.io/f/xgvyowwo" method="POST">
+        <div class="form-group">
+          <label for="email" data-i18n="contact_email_label">Tu correo:</label>
+          <input type="email" name="email" id="email" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="message" data-i18n="contact_message_label">Mensaje:</label>
+          <textarea name="message" id="message" rows="4" required></textarea>
+        </div>
+
+        <button type="submit" data-i18n="contact_send">Enviar</button>
+      </form>
+      
+      <!-- Redes sociales -->
+      <ul class="redes">
+        <li><a href="https://www.linkedin.com/in/ss-lozfer-aa12a9307/" data-i18n="contact_linkedin">LinkedIn</a></li>
+        <li><a href="https://github.com/Sslozfer" data-i18n="contact_github">GitHub</a></li>
+        <li><a href="mailto:Sslozfer@gmail.com" data-i18n="contact_email">Email</a></li>
+      </ul>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <p data-i18n="footer_text">&copy; 2025 Mi Portfolio</p>
+  </footer>
+
+  <!-- ASISTENTE VIRTUAL -->
+  <!-- Boton para abrir el asistente -->
+  <div class="ai-assistant">
+    <button class="ai-toggle-btn" id="toggle-ai-chat">
+      <i class="fas fa-robot"></i>
+    </button>
+  </div>
+
+  <!-- Ventana de chat del asistente -->
+  <div class="ai-chat-container" id="ai-chat">
+    <div class="ai-chat-header">
+      <h3><i class="fas fa-robot"></i> <span data-i18n="ai_title">Asistente Virtual</span></h3>
+      <button class="ai-close-btn" id="close-ai-chat">&times;</button>
+    </div>
+    <div class="ai-chat-messages" id="ai-messages"></div>
+    <div class="ai-chat-input">
+      <textarea id="ai-input" 
+                class="ai-input-field" 
+                placeholder="Pregúntame sobre Santiago..."
+                data-i18n="ai_placeholder"></textarea>
+      <button class="ai-send-btn" id="ai-send">
+        <i class="fas fa-paper-plane"></i>
+      </button>
+    </div>
+  </div>
+
+
+  
+
+
+  <!-- SCRIPTS -->
+
+  <!-- Particles.js -->
+  <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
+
+  <!-- Script principal externo, todo mal profe, estaba mejor aca pero bueno, ahora tengo 90000 archivos :<  -->
+  <script src="{% static 'main.js' %}"></script>
+
+  {% endblock %}
+
+</body>
+</html>

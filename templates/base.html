@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+
+{% load static %}
+
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-i18n="title">Portfolio</title>
+  
+  <!-- CSS -->
+  <link rel="stylesheet" href="{% static 'styles.css' %}">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link rel="icon" type="image/x-icon" href="{% static 'assets/favicon.ico' %}">
+
+  
+  <style>
+    html { scroll-behavior: smooth; }
+  </style>
+</head>
+
+<body>
+
+  <!-- Fondo animado -->
+  <div id="particles-js"></div>
+
+  <!-- HEADER: Navegacion -->
+  <header class="navbar">
+    <button id="menu-toggle" class="hamburger-btn" aria-label="Abrir menú">
+      <i class="fas fa-bars"></i>
+    </button>
+    <ul class="nav-links">
+      <li><a href="/#sobre-mi" data-i18n="nav_about">Sobre mi</a></li>
+      <li><a href="/#habilidades" data-i18n="nav_skills">Habilidades</a></li>
+      <li><a href="/#proyectos" data-i18n="nav_projects">Proyectos</a></li>
+      <li><a href="/blog" data-i18n="nav_blog">Blog</a></li>
+      <li><a href="/#contacto" data-i18n="nav_contact">Contacto</a></li>
+      
+      <!-- Selector de idioma -->
+      <li class="idioma-selector">
+        <button id="botonIdioma" data-i18n="language_button">🌐 Idioma</button>
+        <ul id="listaIdiomas" class="oculto">
+          <li data-lang="es">Español</li>
+          <li data-lang="en">English</li>
+          <li data-lang="zh">中文</li>
+        </ul>
+      </li>
+      
+      <!-- Toggle modo oscuro -->
+      <li>
+        <button id="toggleModo" aria-label="Toggle dark mode">
+          <i id="iconModo" class="fas fa-moon"></i>
+        </button>
+      </li>
+    </ul>
+  </header>
+
+   <main>
+    {% block content %}
+    {% endblock %}
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <p data-i18n="footer_text">&copy; 2025 Mi Portfolio</p>
+  </footer>
+
+  <!-- ASISTENTE VIRTUAL -->
+  <!-- Boton para abrir el asistente -->
+  <div class="ai-assistant">
+    <button class="ai-toggle-btn" id="toggle-ai-chat">
+      <i class="fas fa-robot"></i>
+    </button>
+  </div>
+
+  <!-- Ventana de chat del asistente -->
+  <div class="ai-chat-container" id="ai-chat">
+    <div class="ai-chat-header">
+      <h3><i class="fas fa-robot"></i> <span data-i18n="ai_title">Asistente Virtual</span></h3>
+      <button class="ai-close-btn" id="close-ai-chat">&times;</button>
+    </div>
+    <div class="ai-chat-messages" id="ai-messages"></div>
+    <div class="ai-chat-input">
+      <textarea id="ai-input" 
+                class="ai-input-field" 
+                placeholder="Pregúntame sobre Santiago..."
+                data-i18n="ai_placeholder"></textarea>
+      <button class="ai-send-btn" id="ai-send">
+        <i class="fas fa-paper-plane"></i>
+      </button>
+    </div>
+  </div>
+
+
+  <!-- SCRIPTS -->
+
+  <!-- Particles.js -->
+  <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
+
+  <!-- Script principal externo, todo mal profe, estaba mejor aca pero bueno, ahora tengo 90000 archivos :<  -->
+  <script src="{% static 'main.js' %}"></script>
+
+
+</body>
+</html>

@@ -1,0 +1,60 @@
+
+Asistente virtual: Contexto completo del portafolio de Santiago Lozano
+
+Santiago Lozano es un desarrollador apasionado por la tecnología, la innovacion y el aprendizaje constante.
+Cuenta con experiencia en:
+- Python: +250 horas
+- C#: +110 horas
+- C++: +80 horas
+- HTML: +15 horas
+
+Ha desarrollado varios proyectos destacados, incluidos:
+1. Plantas contra Zombies en Python:
+   - Juego completamente funcional inspirado en PvZ.
+   - Usado como ejemplo de logica de programacion, uso de clases, eventos y animaciones con Pygame.
+   - Disponible en: https://github.com/Sslozfer/pvz-python
+
+2. Mapa de Terremotos:
+   - Visualizacion interactiva de datos sísmicos usando mapas.
+   - Uso de APIs de datos, procesamiento y despliegue grafico.
+   - Disponible en: https://github.com/Sslozfer/Trabajo-1/tree/ramita/parte%201
+
+3. Estadísticas de GitHub:
+   - Muestra graficos sobre usuarios, repositorios y licencias usando Plotly y analisis de datos.
+   - Disponible en: https://github.com/Sslozfer/Trabajo-1/tree/ramita/parte%202
+
+Estructura del codigo HTML (`index.html`):
+- `<header>`: menu de navegacion con selector de idioma y boton de modo oscuro.
+- `<section id="portada">`: portada de bienvenida.
+- `<section id="sobre-mi">`: descripcion personal + boton para descargar el CV.
+- `<section id="habilidades">`: muestra íconos y horas dedicadas a cada lenguaje.
+- `<section id="proyectos">`: grid con los 3 proyectos mas importantes.
+- `<section id="contacto">`: formulario de contacto vía Formspree + enlaces a redes sociales.
+- `<div class="ai-assistant">`: boton flotante para abrir el asistente virtual.
+- `<div id="ai-chat">`: ventana de chat con el asistente virtual.
+
+CSS (`styles.css`):
+- Maneja colores claros y oscuros con variables CSS.
+- Diseño responsive con media queries para tablets y moviles.
+- Estilo moderno con sombras, bordes redondeados y transiciones.
+- Animaciones en botones e íconos (ej: `pulse`, `girar`).
+- Estilo especial para el chat: burbujas, entrada de texto, animacion de escritura.
+
+JavaScript (`main.js`):
+- Modo claro/oscuro con cambio de ícono y partículas.
+- Traductor multi-idioma para español, ingles y chino.
+- Integracion con `particles.js` para fondo animado.
+- Asistente virtual conectado a IA (OpenRouter / GPT) que responde a preguntas.
+  - Puede explicar secciones, proyectos, habilidades o responder preguntas personalizadas sobre Santiago.
+
+Objetivo del asistente:
+- Ayudar al visitante a explorar el portafolio.
+- Explicar que tecnologías domina Santiago.
+- Guiar a otros sobre como contactarlo, descargar su CV o ver sus proyectos.
+
+
+Contacto:
+Santiago puede ser contactado a traves de:
+- LinkedIn: https://www.linkedin.com/in/ss-lozfer-aa12a9307/
+- GitHub: https://github.com/Sslozfer
+- Email: Sslozfer@gmail.com
