@@ -4,7 +4,11 @@ from .forms import ComentarioForm
 
 def lista_posts(request):
     posts = Post.objects.order_by('-fecha_publicacion')
-    return render(request, 'blog/post_list.html', {'posts': posts})
+    years = Post.objects.dates('fecha_publicacion', 'year', order='DESC')
+    return render(request, 'blog/post_list.html', {
+        'posts': posts,
+        'years': years
+    })
 
 def detalle_post(request, pk):
     post = get_object_or_404(Post, pk=pk)

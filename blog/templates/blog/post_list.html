@@ -2,28 +2,49 @@
 {% load static %}
 
 {% block content %}
-<section class="seccion">
-  <h2>Blog</h2>
-  {% for post in posts %}
-    <a href="{% url 'detalle_post' post.pk %}" class="post-link">
-      <div class="proyecto">
-        <p class="post-fecha">{{ post.fecha_publicacion|date:"d M Y" }}</p>
-        <h3>{{ post.titulo }}</h3>
-        <p>{{ post.contenido|truncatechars:150 }}</p>
+<div style="display: flex;">
 
-        {% if post.archivos.first %}
-          {% with post.archivos.first.archivo.url as archivo_url %}
-            {% if archivo_url|lower|slice:"-4:" == ".jpg" or archivo_url|lower|slice:"-4:" == ".png" or archivo_url|lower|slice:"-5:" == ".jpeg" or archivo_url|lower|slice:"-4:" == ".gif" %}
-              <div style="width: 280px; height: 180px; overflow: hidden; border-radius: 8px;">
-                <img src="{{ archivo_url }}" class="preview-img">
-              </div>
+  <!-- Barra lateral de años -->
+  <aside class="year-sidebar">
+    <ul id="year-sidebar">
+      {% for year in years %}
+        <li data-year="{{ year.year }}">
+          <a href="#year-{{ year.year }}">
+            {{ year.year }}
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  </aside>
+
+  <!-- Lista de posts -->
+  <section style="flex: 1; padding-left: 100px; padding-right: 80px;">
+    <h2>Blog</h2>
+    {% for post in posts %}
+      <div id="year-{{ post.fecha_publicacion|date:'Y' }}" class="post-item">
+        <a href="{% url 'detalle_post' post.pk %}" class="post-link">
+          <div class="proyecto">
+            <p class="post-fecha">{{ post.fecha_publicacion|date:"d M Y" }}</p>
+            <h3>{{ post.titulo }}</h3>
+            <div class="post-contenido">
+              {{ post.contenido|truncatechars:150 }}
+            </div>
+            {% if post.archivos.first %}
+              {% with post.archivos.first.archivo.url as archivo_url %}
+                {% if archivo_url|lower|slice:"-4:" == ".jpg" or archivo_url|lower|slice:"-4:" == ".png" or archivo_url|lower|slice:"-5:" == ".jpeg" or archivo_url|lower|slice:"-4:" == ".gif" %}
+                  <div style="width: 280px; height: 180px; overflow: hidden; border-radius: 8px;">
+                    <img src="{{ archivo_url }}" class="preview-img">
+                  </div>
+                {% endif %}
+              {% endwith %}
             {% endif %}
-          {% endwith %}
-        {% endif %}
+          </div>
+        </a>
       </div>
-    </a>
-  {% empty %}
-    <p>No hay entradas todavía.</p>
-  {% endfor %}
-</section>
+    {% empty %}
+      <p>No hay entradas todavía.</p>
+    {% endfor %}
+  </section>
+
+</div>
 {% endblock %}

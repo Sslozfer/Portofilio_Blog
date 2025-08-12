@@ -26,7 +26,7 @@ class ArchivoMultimedia(models.Model):
 class Comentario(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comentarios')
     autor = models.CharField(max_length=100)
-    texto = models.TextField()
+    texto = models.TextField(max_length=5000)
     fecha = models.DateTimeField(default=timezone.now)
 
     def __str__(self):

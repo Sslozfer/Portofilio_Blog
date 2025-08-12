@@ -312,3 +312,78 @@ const navLinks = document.querySelector('.nav-links');
 menuToggle.addEventListener('click', () => {
   navLinks.classList.toggle('show');
 });
+
+// ========================================
+// CORTE AUTOMÁTICO CON GUIONES
+// ========================================
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll(".post-contenido").forEach((el) => {
+    const words = el.innerHTML.split(/(\s+)/); 
+    const updated = words.map((word) => { 
+      const clean = word.replace(/<[^>]*>/g, "");
+      if (clean.length > 15 && !clean.includes(" ")) {
+        return `<span style="word-break: break-all; hyphens: auto; display: inline-block; lang="es"">${word}</span>`;
+      }
+      return word;
+    });
+    el.innerHTML = updated.join('');
+  });
+});
+
+// ========================================
+// COLAPSAR COMENTARIOS LARGOS
+// ========================================
+document.addEventListener("DOMContentLoaded", () => {
+  const limite = 500;
+
+  document.querySelectorAll('.comentario-texto').forEach(span => {
+    const textoCompleto = span.textContent.trim();
+
+    if (textoCompleto.length > limite) {
+      const visible = textoCompleto.slice(0, limite);
+      const oculto = textoCompleto.slice(limite);
+
+      span.innerHTML = `
+        <span class="comentario-visible">${visible}</span>
+        <span class="comentario-oculto" style="display:none;">${oculto}</span>
+        <button class="comentario-toggle" style="border:none; background:none; color:var(--accent-color); cursor:pointer; font-weight:bold;"> Leer más...</button>
+      `;
+
+      const boton = span.querySelector('.comentario-toggle');
+      const ocultoSpan = span.querySelector('.comentario-oculto');
+      const visibleSpan = span.querySelector('.comentario-visible');
+
+      boton.addEventListener('click', () => {
+        const expandido = ocultoSpan.style.display === 'inline';
+        ocultoSpan.style.display = expandido ? 'none' : 'inline';
+        boton.textContent = expandido ? ' Leer más...' : ' Leer menos';
+        if (!expandido) {
+          visibleSpan.style.display = 'inline';
+        }
+      });
+    }
+  });
+});
+
+
+// ========================================
+// SELECCIÓN DE AÑO EN EL BLOG
+// ========================================
+document.addEventListener('DOMContentLoaded', () => {
+  const yearLinks = document.querySelectorAll('#year-sidebar li');
+  const postSections = document.querySelectorAll('.post-item');
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const year = entry.target.id.replace('year-', '');
+        yearLinks.forEach(link => {
+          link.classList.toggle('active', link.dataset.year === year);
+        });
+      }
+    });
+  }, { threshold: 0.4 });
+
+  postSections.forEach(section => observer.observe(section));
+});
+
