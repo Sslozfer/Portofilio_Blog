@@ -1,6 +1,7 @@
 // ========================================
 // CONFIGURACIoN DE PARTICULAS
 // ========================================
+
 const lightParticles = {
   particles: {
     number: { value: 60 },
@@ -75,9 +76,11 @@ toggleBtn.addEventListener('click', () => {
 
 actualizarIconoModo();
 
+
 // ========================================
 // TRADUCCIoN MULTI-IDIOMA
 // ========================================
+
 const translations = {
       es: {
         title: "Portfolio",
@@ -229,6 +232,7 @@ if (idiomaGuardado) {
 // ========================================
 // ASISTENTE VIRTUAL 
 // ========================================
+
 const toggleAIButton = document.getElementById('toggle-ai-chat');
 const chatContainer = document.getElementById('ai-chat');
 const closeBtn = document.getElementById('close-ai-chat');
@@ -303,9 +307,11 @@ async function consultarIA(texto) {
   }
 }
 
+
 // ========================
 // MENÚ HAMBURGUESA
 // ========================
+
 const menuToggle = document.getElementById('menu-toggle');
 const navLinks = document.querySelector('.nav-links');
 
@@ -313,9 +319,11 @@ menuToggle.addEventListener('click', () => {
   navLinks.classList.toggle('show');
 });
 
+
 // ========================================
 // CORTE AUTOMÁTICO CON GUIONES
 // ========================================
+
 document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll(".post-contenido").forEach((el) => {
     const words = el.innerHTML.split(/(\s+)/); 
@@ -330,9 +338,11 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
+
 // ========================================
 // COLAPSAR COMENTARIOS LARGOS
 // ========================================
+
 document.addEventListener("DOMContentLoaded", () => {
   const limite = 500;
 
@@ -369,6 +379,7 @@ document.addEventListener("DOMContentLoaded", () => {
 // ========================================
 // SELECCIÓN DE AÑO EN EL BLOG
 // ========================================
+
 document.addEventListener('DOMContentLoaded', () => {
   const yearLinks = document.querySelectorAll('#year-sidebar li');
   const postSections = document.querySelectorAll('.post-item');
@@ -387,3 +398,24 @@ document.addEventListener('DOMContentLoaded', () => {
   postSections.forEach(section => observer.observe(section));
 });
 
+
+// ========================================
+// BOTON RESPONDER A COMENTARIOS
+// ========================================
+
+document.addEventListener("DOMContentLoaded", function() {
+  const botones = document.querySelectorAll(".btn-responder");
+  const textarea = document.querySelector("textarea[name='texto']");
+    botones.forEach(boton => {
+    boton.addEventListener("click", function() {
+      const usuario = this.getAttribute("data-usuario");
+      if (textarea) {
+        const mention = `@${usuario} `;
+        if (!textarea.value.includes(mention)) {
+          textarea.value = mention + textarea.value;
+        }
+      textarea.focus();
+      }
+    });
+  });
+});

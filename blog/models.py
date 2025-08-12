@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from django.contrib.auth.models import User
 
 class Post(models.Model):
     titulo = models.CharField(max_length=200)
@@ -25,11 +26,14 @@ class ArchivoMultimedia(models.Model):
 
 class Comentario(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comentarios')
-    autor = models.CharField(max_length=100)
+    usuario = models.ForeignKey(User, null=True, blank=True, on_delete=models.SET_NULL)  # Para usuarios registrados
+    autor = models.CharField(max_length=100, blank=True)  # Para invitados
     texto = models.TextField(max_length=5000)
     fecha = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
+        if self.usuario:
+            return f'Comentario de {self.usuario.username} en {self.post}'
         return f'Comentario de {self.autor} en {self.post}'
 
 

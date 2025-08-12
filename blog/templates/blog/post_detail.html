@@ -10,25 +10,21 @@
     {{ post.contenido|linebreaks }}
   </div>
 
-
   <div class="imagenes-contenedor">
     {% for archivo in post.archivos.all %}
       {% with url=archivo.archivo.url|lower %}
         {% if url|slice:"-4:" == ".jpg" or url|slice:"-4:" == ".png" or url|slice:"-5:" == ".jpeg" or url|slice:"-4:" == ".gif" %}
           <img src="{{ archivo.archivo.url }}" class="detalle-img">
-
         {% elif url|slice:"-4:" == ".mp4" or url|slice:"-5:" == ".webm" or url|slice:"-4:" == ".mov" %}
           <video controls class="detalle-video">
             <source src="{{ archivo.archivo.url }}" type="video/mp4">
             Tu navegador no soporta la reproducción de video.
           </video>
-
         {% elif url|slice:"-4:" == ".mp3" or url|slice:"-4:" == ".ogg" or url|slice:"-4:" == ".wav" %}
           <audio controls class="detalle-audio">
             <source src="{{ archivo.archivo.url }}" type="audio/mpeg">
             Tu navegador no soporta la reproducción de audio.
           </audio>
-
         {% else %}
           <p><a href="{{ archivo.archivo.url }}" target="_blank">Descargar archivo adjunto</a></p>
         {% endif %}
@@ -39,21 +35,58 @@
   <!-- Comentarios -->
   <h3 style="margin-top: 40px;">Comentarios</h3>
   {% for comentario in comentarios %}
-    <div class="comentario">
-      <p class="comentario-fecha">{{ comentario.fecha|date:"d M Y H:i" }}</p>
-      <strong>{{ comentario.autor }}</strong>:
-      <span class="comentario-texto">{{ comentario.texto }}</span>
-    </div>
-  {% empty %}
-    <p>No hay comentarios aún.</p>
-  {% endfor %}
+  <div class="comentario">
+    <p class="comentario-fecha">{{ comentario.fecha|date:"d M Y H:i" }}</p>
+    <strong>{{ comentario.autor }}</strong>:
+    <span class="comentario-texto">{{ comentario.texto }}</span>
+
+    {% if user.is_authenticated %}
+      <button type="button" class="btn-responder" data-usuario="{{ comentario.autor }}">
+        Responder
+      </button>
+    {% endif %}
+  </div>
+{% empty %}
+  <p>No hay comentarios aún.</p>
+{% endfor %}
+
 
   <!-- Formulario de comentario -->
   <h3>Agregar comentario</h3>
-  <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit" class="boton-descarga">Publicar</button>
-  </form>
+  {% if user.is_authenticated %}
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit" class="boton-descarga">Publicar</button>
+    </form>
+  {% else %}
+    <p>
+      Debes <a href="{% url 'login' %}?next={{ request.path }}">iniciar sesión</a> para comentar.
+    </p>
+  {% endif %}
 </section>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  const botones = document.querySelectorAll(".btn-responder");
+  const textarea = document.getElementById("id_texto");
+
+  botones.forEach(boton => {
+    boton.addEventListener("click", function() {
+      const usuario = this.getAttribute("data-usuario");
+      if (textarea) {
+        const mention = `@${usuario} `;
+        if (!textarea.value.includes(mention)) {
+          textarea.value = mention + textarea.value;
+        }
+        textarea.focus();
+        textarea.scrollIntoView({ behavior: "smooth", block: "center" });
+      }
+    });
+  });
+});
+</script>
+
+<script src="{% static 'blog/js/comentarios.js' %}"></script>
+
 {% endblock %}
