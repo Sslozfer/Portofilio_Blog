@@ -240,6 +240,61 @@ body.oscuro #listaIdiomas {
   display: block;
 }
 
+.user-menu {
+  position: absolute; 
+  right: 1rem;        
+  top: 50%;
+  transform: translateY(-50%);
+}
+.user-icon {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+  color: inherit;
+}
+
+.user-dropdown {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 100%;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  min-width: 150px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  padding: 10px;
+  z-index: 100;
+}
+
+.user-dropdown a, 
+.user-dropdown p {
+  display: block;
+  padding: 5px 10px;
+  text-decoration: none;
+  color: #333;
+}
+
+.user-dropdown a:hover {
+  background: #f0f0f0;
+}
+
+body.oscuro .user-dropdown {
+  background: var(--card-bg-dark);
+  border: 1px solid var(--border-dark);
+}
+
+body.oscuro .user-dropdown a,
+body.oscuro .user-dropdown p {
+  color: var(--text-dark);
+}
+
+body.oscuro .user-dropdown a:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+
 /* ========================================
    PORTADA
    ======================================== */
@@ -1207,7 +1262,6 @@ body.oscuro footer {
 
 
 /* ===== MENÚ HAMBURGUESA ===== */
-
 .hamburger-btn {
   display: none;
   background: none;
@@ -1246,12 +1300,47 @@ body.oscuro footer {
   body.oscuro .nav-links {
     background-color: #1a1a1a;
   }
+
+  /* Desktop: flotado a la derecha */
+@media (min-width: 769px) {
+  .user-menu {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    list-style: none;
+  }
 }
 
+/* Mobile: como un item más del menú */
+@media (max-width: 768px) {
+  .user-menu {
+    align-self: flex-end;
+    margin: 0.5rem 1rem;
+    position: relative;
+    transform: none;
+    right: auto;
+    top: auto;
+    display: block; 
+  }
+}
+
+}
 /* ========================================
                 BLOG PERSONAL
    ======================================== */
 
+.blog-list {
+  flex: 1;
+  padding-left: 100px;
+  padding-right: 80px;
+  padding-top: 100px; 
+}
+
+body.oscuro .blog-list {
+  background-color: #121212;
+  color: var(--text-dark);
+}
 .post-link {
   text-decoration: none;
   color: inherit;
@@ -1320,13 +1409,13 @@ body.oscuro footer {
 
 .year-sidebar {
   position: fixed;
-  top: var(--navbar-height, 70px); /* podemos usar variable o número fijo */
+  top: var(--navbar-height, 70px); 
   left: 0;
   height: calc(100vh - var(--navbar-height, 70px));
   width: 80px;
   background: rgba(0, 0, 0, 0.4);
   backdrop-filter: blur(6px);
-  z-index: 500; /* más bajo que el header, pero más alto que el contenido */
+  z-index: 500; 
 
   display: flex;
   flex-direction: column;
@@ -1336,7 +1425,7 @@ body.oscuro footer {
   list-style: none;
   margin: 0;
   padding: 0;
-  flex: 1; /* ocupa todo el espacio vertical */
+  flex: 1; 
   display: flex;
   flex-direction: column;
   justify-content: space-around; /* reparte los años */
@@ -1368,3 +1457,84 @@ body.oscuro footer {
   color: #222;
 }
 
+
+/* ========================================
+   LOGIN / REGISTRO 
+   ======================================== */
+
+.auth-section {
+  min-height: calc(100vh - var(--navbar-height, 70px));
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: var(--navbar-height, 70px);
+  position: relative;
+  z-index: 1;
+}
+
+
+.auth-card {
+  background: var(--card-bg-light);
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: var(--shadow-light);
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+  animation: fadeInUp 0.6s ease;
+}
+
+body.oscuro .auth-card {
+  background: var(--card-bg-dark);
+  box-shadow: var(--shadow-dark);
+}
+
+.auth-card h2 {
+  margin-bottom: 1.5rem;
+}
+
+.auth-card form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.auth-card input {
+  padding: 0.75rem;
+  border: 1px solid var(--border-light);
+  border-radius: 5px;
+}
+
+body.oscuro .auth-card input {
+  background: #2a2a2a;
+  border: 1px solid var(--border-dark);
+  color: var(--text-dark);
+}
+
+.btn-accent {
+  background: var(--accent-color);
+  color: #fff;
+  padding: 0.75rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.btn-accent:hover {
+  background: var(--accent-hover);
+}
+
+.auth-switch {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+}
+
+.auth-switch a {
+  color: var(--accent-color);
+  text-decoration: none;
+}
+
+.auth-switch a:hover {
+  text-decoration: underline;
+}

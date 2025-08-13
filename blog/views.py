@@ -6,7 +6,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
-
+from django.contrib.auth import logout
 from .models import Post
 from .forms import ComentarioForm
 
@@ -26,10 +26,17 @@ def registro(request):
         if form.is_valid():
             usuario = form.save()
             login(request, usuario)
-            return redirect('lista_posts')
+            next_url = request.POST.get('next') or 'home'
+            return redirect(next_url)
     else:
         form = UserCreationForm()
     return render(request, 'registro.html', {'form': form})
+
+# Logout de usuario
+def logout_view(request):
+    logout(request)
+    next_url = request.GET.get('next', '/')
+    return redirect(next_url)
 
 # Detalle del post + comentarios con menciones
 def detalle_post(request, pk):

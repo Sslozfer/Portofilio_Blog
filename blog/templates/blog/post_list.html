@@ -18,12 +18,12 @@
   </aside>
 
   <!-- Lista de posts -->
-  <section style="flex: 1; padding-left: 100px; padding-right: 80px;">
-    <h2>Blog</h2>
+  <section class="blog-list">
+    <h1 class="section-title" data-i18n="blog_title">Blog Personal</h1>  
     {% for post in posts %}
       <div id="year-{{ post.fecha_publicacion|date:'Y' }}" class="post-item">
         <a href="{% url 'detalle_post' post.pk %}" class="post-link">
-          <div class="proyecto">
+          <div class="proyecto"> 
             <p class="post-fecha">{{ post.fecha_publicacion|date:"d M Y" }}</p>
             <h3>{{ post.titulo }}</h3>
             <div class="post-contenido">
@@ -42,7 +42,7 @@
         </a>
       </div>
     {% empty %}
-      <p>No hay entradas todavía.</p>
+      <p data-i18n="no_entries">No hay entradas todavía.</p>  
     {% endfor %}
   </section>
 

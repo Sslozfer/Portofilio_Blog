@@ -6,10 +6,17 @@ class ComentarioForm(forms.ModelForm):
         model = Comentario
         fields = ['texto']  
         widgets = {
-        'texto': forms.Textarea(attrs={
-        'id': 'id_texto',
-        'rows': 3,
-        'placeholder': 'Escribe tu comentario...'
-        }),
-}
+            'texto': forms.Textarea(attrs={
+                'id': 'id_texto',
+                'rows': 3,
+                'data-i18n-placeholder': 'form_placeholder_texto',
+                'placeholder': '',  
+            }),
+        }
+        labels = {
+            'texto': '',  
+        }
+        help_texts = {
+            'texto': '',  
+        }
 
