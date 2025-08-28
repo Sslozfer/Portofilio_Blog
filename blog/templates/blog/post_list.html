@@ -1,11 +1,14 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block content %}
-<div style="display: flex;">
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'css/blog.css' %}">
+{% endblock %}
 
+{% block content %}
+<div class="blog-container">
   <!-- Barra lateral de años -->
-  <aside class="year-sidebar">
+  <aside class="year-sidebar" id="year-sidebar-container">
     <ul id="year-sidebar">
       {% for year in years %}
         <li data-year="{{ year.year }}">
@@ -27,6 +30,70 @@
       <p data-i18n="no_entries">No hay entradas todavía.</p>  
     {% endfor %}
   </section>
-
 </div>
+
+<!-- Boton para mostrar/ocultar sidebar en moviles - Fuera del blog-container -->
+<button id="sidebar-toggle" class="sidebar-toggle-btn" aria-label="Mostrar años">
+  <i class="fas fa-calendar-alt"></i>
+</button>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+// Toggle del sidebar en moviles
+document.addEventListener('DOMContentLoaded', function() {
+  const sidebarToggle = document.getElementById('sidebar-toggle');
+  const sidebarContainer = document.getElementById('year-sidebar-container');
+  
+  if (sidebarToggle && sidebarContainer) {
+    sidebarToggle.addEventListener('click', function() {
+      sidebarContainer.classList.toggle('active');
+      this.classList.toggle('active');
+      
+      // Cambiar icono
+      const icon = this.querySelector('i');
+      if (sidebarContainer.classList.contains('active')) {
+        icon.classList.remove('fa-calendar-alt');
+        icon.classList.add('fa-times');
+        this.style.animation = 'none'; 
+      } else {
+        icon.classList.remove('fa-times');
+        icon.classList.add('fa-calendar-alt');
+        this.style.animation = 'pulse-sidebar 2s infinite'; 
+      }
+    });
+    
+    // Cerrar sidebar al hacer clic en un enlace
+    const yearLinks = document.querySelectorAll('#year-sidebar a');
+    yearLinks.forEach(link => {
+      link.addEventListener('click', function() {
+        if (window.innerWidth < 768) {
+          sidebarContainer.classList.remove('active');
+          sidebarToggle.classList.remove('active');
+          const icon = sidebarToggle.querySelector('i');
+          icon.classList.remove('fa-times');
+          icon.classList.add('fa-calendar-alt');
+          sidebarToggle.style.animation = 'pulse-sidebar 2s infinite'; 
+        }
+      });
+    });
+    
+    // Cerrar sidebar al hacer clic fuera de él
+    document.addEventListener('click', function(event) {
+      if (window.innerWidth < 768 && 
+          sidebarContainer.classList.contains('active') &&
+          !sidebarContainer.contains(event.target) &&
+          event.target !== sidebarToggle &&
+          !sidebarToggle.contains(event.target)) {
+        sidebarContainer.classList.remove('active');
+        sidebarToggle.classList.remove('active');
+        const icon = sidebarToggle.querySelector('i');
+        icon.classList.remove('fa-times');
+        icon.classList.add('fa-calendar-alt');
+        sidebarToggle.style.animation = 'pulse-sidebar 2s infinite'; 
+      }
+    });
+  }
+});
+</script>
 {% endblock %}

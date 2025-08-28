@@ -43,10 +43,9 @@ def detalle_post(request, pk):
     post = get_object_or_404(Post, pk=pk)
     comentarios = post.comentarios.order_by('-fecha')
 
-    # Si es POST: solo permitimos procesar si el usuario está autenticado
+    # Si es POST: solo permitimos procesar si el usuario esta autenticado
     if request.method == 'POST':
         if not request.user.is_authenticated:
-            # Redirigimos al login (nombre 'login' definido en blog/urls.py), conservando next
             login_url = reverse('login')
             return redirect(f"{login_url}?next={request.path}")
 
@@ -77,7 +76,6 @@ def detalle_post(request, pk):
                                 comentario.respuesta_a = parent
                                 comentario.save()
                             except Exception:
-                                # Si por alguna razón no se puede asignar, lo ignoramos
                                 pass
 
                         # Enviar correo si tiene e-mail y está configurado el mail backend
@@ -93,7 +91,6 @@ def detalle_post(request, pk):
                         continue
 
             return redirect('detalle_post', pk=post.pk)
-        # si el form no es válido, renderizamos de nuevo con errores
 
     else:
         form = ComentarioForm()

@@ -1,0 +1,322 @@
+/* ========================================
+   SECCIoN SOBRE Mi
+   ======================================== */
+.boton-descarga {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.75rem 1.5rem;
+  background-color: var(--success-color);
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background 0.3s;
+  font-size: clamp(0.9rem, 2.5vw, 1rem);
+}
+
+.boton-descarga:hover {
+  background-color: var(--success-hover);
+}
+
+/* ========================================
+   SECCIoN HABILIDADES
+   ======================================== */
+.habilidades {
+  padding: 3rem 1rem;
+  background-color: transparent;
+  text-align: center;
+  max-width: 960px;
+  margin: 0 auto 4rem auto;
+}
+
+.habilidades h2 {
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  margin-bottom: 2rem;
+  font-weight: 700;
+}
+
+.habilidades-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(160px, 100%), 1fr));
+  gap: 1.5rem;
+  justify-items: center;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.habilidad {
+  background: rgba(255, 255, 255, 0.8);
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: var(--shadow-light);
+  width: 100%;
+  max-width: 180px;
+  text-align: center;
+  transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+  cursor: default;
+}
+
+body.oscuro .habilidad {
+  background: rgba(34, 34, 34, 0.8);
+  box-shadow: var(--shadow-dark);
+}
+
+.habilidad:hover {
+  background: rgba(0, 119, 204, 0.15);
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-hover);
+  cursor: pointer;
+}
+
+.habilidad i {
+  font-size: clamp(2rem, 5vw, 3rem);
+  margin: 0.5rem 0;
+}
+
+.habilidad h3 {
+  margin: 0;
+  font-size: clamp(1rem, 3vw, 1.2rem);
+}
+
+.habilidad p {
+  margin-top: 0.25rem;
+  font-weight: bold;
+  font-size: clamp(0.8rem, 2.5vw, 0.9rem);
+}
+
+/* ========================================
+   SECCIoN PROYECTOS
+   ======================================== */
+.proyectos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+  gap: 20px;
+}
+
+.proyecto {
+  background: #f9f9f9;
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: var(--shadow-light);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+body.oscuro .proyecto {
+  background: #2b2b2b;
+  box-shadow: var(--shadow-dark);
+}
+
+.proyecto:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.15);
+}
+
+.proyecto img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 0.5rem;
+  object-fit: cover;
+}
+
+.proyecto h3 {
+  margin-bottom: 0.5rem;
+}
+
+.proyecto p {
+  margin-bottom: 1rem;
+}
+
+.proyecto a {
+  color: var(--accent-color);
+  text-decoration: none;
+  font-weight: bold;
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  border: 2px solid var(--accent-color);
+  border-radius: 5px;
+  transition: all 0.3s;
+}
+
+.proyecto a:hover {
+  background-color: var(--accent-color);
+  color: white;
+}
+
+/* ========================================
+   FORMULARIOS
+   ======================================== */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 500px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+form label {
+  font-weight: bold;
+  font-size: clamp(0.9rem, 2.5vw, 1rem);
+}
+
+form input,
+form textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid var(--border-light);
+  border-radius: 5px;
+  font-size: clamp(0.9rem, 2.5vw, 1rem);
+}
+
+form textarea {
+  height: 120px;
+  resize: vertical;
+  min-height: 80px;
+}
+
+body.oscuro form input,
+body.oscuro form textarea {
+  background-color: #2a2a2a;
+  border: 1px solid var(--border-dark);
+  color: var(--text-dark);
+}
+
+form button[type="submit"] {
+  padding: 0.75rem 1.5rem;
+  background-color: var(--accent-color);
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: clamp(0.9rem, 2.5vw, 1rem);
+  cursor: pointer;
+  transition: background 0.3s;
+  align-self: flex-start;
+  min-width: 120px;
+}
+
+form button[type="submit"]:hover {
+  background-color: var(--accent-hover);
+}
+
+/* ========================================
+   SECCIoN CONTACTO - REDES SOCIALES
+   ======================================== */
+.redes {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-top: 1rem;
+  padding: 0;
+  justify-content: center;
+}
+
+.redes li a {
+  color: inherit;
+  transition: color 0.3s;
+  font-size: clamp(0.9rem, 2.5vw, 1rem);
+  padding: 0.5rem 1rem;
+  border: 1px solid currentColor;
+  border-radius: 5px;
+  text-decoration: none;
+  display: block;
+}
+
+.redes li a:hover {
+  color: var(--accent-color);
+  border-color: var(--accent-color);
+}
+
+/* ========================================
+   MEDIA QUERIES - PORTFOLIO
+   ======================================== */
+
+/* Pantallas grandes */
+@media (min-width: 1200px) {
+  .seccion {
+    max-width: 1200px;
+  }
+  
+  .proyectos-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .habilidades-grid {
+    grid-template-columns: repeat(4, 1fr);
+    max-width: 1000px;
+  }
+}
+
+/* Tablets */
+@media (max-width: 768px) {
+  .proyectos-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+  
+  .habilidades-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+  
+  .redes {
+    gap: 1rem;
+  }
+}
+
+/* Moviles */
+@media (max-width: 480px) {
+  .portada {
+    padding: 0 15px;
+  }
+  
+  .portada-contenido h1 {
+    font-size: 2rem;
+  }
+  
+  .portada-contenido p {
+    font-size: 1rem;
+  }
+  
+  .habilidades-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .habilidad {
+    max-width: 100%;
+  }
+  
+  .redes {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .redes li a {
+    width: 200px;
+    text-align: center;
+  }
+  
+  form button[type="submit"] {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+/* Moviles muy pequeños */
+@media (max-width: 360px) {
+  .portada-contenido h1 {
+    font-size: 1.5rem;
+  }
+  
+  .portada-contenido p {
+    font-size: 0.9rem;
+  }
+}

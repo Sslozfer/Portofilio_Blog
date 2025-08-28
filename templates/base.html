@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 {% load static %}
 
 <html lang="es">
@@ -8,19 +7,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title data-i18n="title">Portfolio</title>
   
-  <!-- CSS -->
-  <link rel="stylesheet" href="{% static 'styles.css' %}">
+  <!-- CSS base -->
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+
+  <!-- Fonts y icons -->
   <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
   <link rel="icon" type="image/x-icon" href="{% static 'assets/favicon.ico' %}">
 
-  
-  <style>
-    html { scroll-behavior: smooth; }
-  </style>
-
-  {% block extra_head %}{% endblock %} 
-
+  {% block extra_head %}{% endblock %}
 </head>
 
 <body>
@@ -36,10 +31,13 @@
 
   {% include "includes/footer.html" %}
   {% include "includes/ai_chat.html" %}
-  {% include "includes/scripts.html" %}
+  
+  <!-- Libreria externa -->
+  <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
+  
+  <!-- Script modular principal -->
+  <script type="module" src="{% static 'js/main.js' %}"></script>
 
   {% block extra_scripts %}{% endblock %}
-  
 </body>
-
 </html>
