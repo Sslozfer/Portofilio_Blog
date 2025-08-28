@@ -1,0 +1,11 @@
+<div class="comentario">
+  <p class="comentario-fecha">{{ comentario.fecha|date:"d M Y H:i" }}</p>
+  <strong>{{ comentario.autor }}</strong>:
+  <span class="comentario-texto">{{ comentario.texto }}</span>
+
+  {% if user.is_authenticated %}
+    <button type="button" class="btn-responder" data-usuario="{{ comentario.autor }}">
+      <span data-i18n="reply_button">Responder</span>
+    </button>
+  {% endif %}
+</div>

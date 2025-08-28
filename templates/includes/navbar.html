@@ -1,0 +1,56 @@
+{% load static %}
+
+<header class="navbar">
+  <button id="menu-toggle" class="hamburger-btn" aria-label="Abrir menú">
+    <i class="fas fa-bars"></i>
+  </button>
+
+  <ul class="nav-links">
+    {% if section_links %}
+      <li><a href="#sobre-mi" data-i18n="nav_about">Sobre mi</a></li>
+      <li><a href="#habilidades" data-i18n="nav_skills">Habilidades</a></li>
+      <li><a href="#proyectos" data-i18n="nav_projects">Proyectos</a></li>
+      <li><a href="/blog" data-i18n="nav_blog">Blog</a></li>
+      <li><a href="#contacto" data-i18n="nav_contact">Contacto</a></li>
+    {% else %}
+      <li><a href="/" data-i18n="nav_about">Sobre mi</a></li>
+      <li><a href="/" data-i18n="nav_skills">Habilidades</a></li>
+      <li><a href="/" data-i18n="nav_projects">Proyectos</a></li>
+      <li><a href="/blog" data-i18n="nav_blog">Blog</a></li>
+      <li><a href="/" data-i18n="nav_contact">Contacto</a></li>
+    {% endif %}
+
+    <!-- Selector de idioma -->
+    <li class="idioma-selector">
+      <button id="botonIdioma" data-i18n="language_button">🌐 Idioma</button>
+      <ul id="listaIdiomas" class="oculto">
+        <li data-lang="es">Español</li>
+        <li data-lang="en">English</li>
+        <li data-lang="zh">中文</li>
+      </ul>
+    </li>
+
+    <!-- Toggle modo oscuro -->
+    <li>
+      <button id="toggleModo" aria-label="Toggle dark mode">
+        <i id="iconModo" class="fas fa-moon"></i>
+      </button>
+    </li>
+
+    <!-- Usuario -->
+    <li class="user-menu">
+      <button id="userMenuBtn" class="user-icon">
+        <i class="fa fa-user"></i>
+      </button>
+      <div id="userDropdown" class="user-dropdown">
+        {% if user.is_authenticated %}
+          <p class="user-name">{{ user.username }}</p>
+          <a href="{% url 'logout' %}?next={{ request.path }}" data-i18n="logout_button">Cerrar sesión</a>
+        {% else %}
+          <a href="{% url 'login' %}?next={{ request.path }}" data-i18n="login_button">Iniciar sesión</a>
+          <a href="{% url 'registro' %}?next={{ request.path }}" data-i18n="register_submit">Registrarse</a>
+        {% endif %}
+      </div>
+    </li>
+  </ul>
+</header>

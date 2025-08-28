@@ -20,27 +20,9 @@
   <!-- Lista de posts -->
   <section class="blog-list">
     <h1 class="section-title" data-i18n="blog_title">Blog Personal</h1>  
+
     {% for post in posts %}
-      <div id="year-{{ post.fecha_publicacion|date:'Y' }}" class="post-item">
-        <a href="{% url 'detalle_post' post.pk %}" class="post-link">
-          <div class="proyecto"> 
-            <p class="post-fecha">{{ post.fecha_publicacion|date:"d M Y" }}</p>
-            <h3>{{ post.titulo }}</h3>
-            <div class="post-contenido">
-              {{ post.contenido|truncatechars:150 }}
-            </div>
-            {% if post.archivos.first %}
-              {% with post.archivos.first.archivo.url as archivo_url %}
-                {% if archivo_url|lower|slice:"-4:" == ".jpg" or archivo_url|lower|slice:"-4:" == ".png" or archivo_url|lower|slice:"-5:" == ".jpeg" or archivo_url|lower|slice:"-4:" == ".gif" %}
-                  <div style="width: 280px; height: 180px; overflow: hidden; border-radius: 8px;">
-                    <img src="{{ archivo_url }}" class="preview-img">
-                  </div>
-                {% endif %}
-              {% endwith %}
-            {% endif %}
-          </div>
-        </a>
-      </div>
+      {% include "blog/includes/post_card.html" with post=post %}
     {% empty %}
       <p data-i18n="no_entries">No hay entradas todavía.</p>  
     {% endfor %}

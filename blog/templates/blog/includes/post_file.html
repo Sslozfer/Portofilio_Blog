@@ -1,0 +1,24 @@
+{% with url=archivo.archivo.url|lower %}
+  {% if url|slice:"-4:" == ".jpg" or url|slice:"-4:" == ".png" or url|slice:"-5:" == ".jpeg" or url|slice:"-4:" == ".gif" %}
+    <img src="{{ archivo.archivo.url }}" class="detalle-img">
+
+  {% elif url|slice:"-4:" == ".mp4" or url|slice:"-5:" == ".webm" or url|slice:"-4:" == ".mov" %}
+    <video controls class="detalle-video">
+      <source src="{{ archivo.archivo.url }}" type="video/mp4">
+      <span data-i18n="video_not_supported">Tu navegador no soporta la reproducción de video.</span>
+    </video>
+
+  {% elif url|slice:"-4:" == ".mp3" or url|slice:"-4:" == ".ogg" or url|slice:"-4:" == ".wav" %}
+    <audio controls class="detalle-audio">
+      <source src="{{ archivo.archivo.url }}" type="audio/mpeg">
+      <span data-i18n="audio_not_supported">Tu navegador no soporta la reproducción de audio.</span>
+    </audio>
+
+  {% else %}
+    <p>
+      <a href="{{ archivo.archivo.url }}" target="_blank" data-i18n="download_attachment_link">
+        Descargar archivo adjunto
+      </a>
+    </p>
+  {% endif %}
+{% endwith %}

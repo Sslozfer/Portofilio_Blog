@@ -12,44 +12,17 @@
 
   <div class="imagenes-contenedor">
     {% for archivo in post.archivos.all %}
-      {% with url=archivo.archivo.url|lower %}
-        {% if url|slice:"-4:" == ".jpg" or url|slice:"-4:" == ".png" or url|slice:"-5:" == ".jpeg" or url|slice:"-4:" == ".gif" %}
-          <img src="{{ archivo.archivo.url }}" class="detalle-img">
-        {% elif url|slice:"-4:" == ".mp4" or url|slice:"-5:" == ".webm" or url|slice:"-4:" == ".mov" %}
-          <video controls class="detalle-video">
-            <source src="{{ archivo.archivo.url }}" type="video/mp4">
-            <span data-i18n="video_not_supported">Tu navegador no soporta la reproducción de video.</span> 
-          </video>
-        {% elif url|slice:"-4:" == ".mp3" or url|slice:"-4:" == ".ogg" or url|slice:"-4:" == ".wav" %}
-          <audio controls class="detalle-audio">
-            <source src="{{ archivo.archivo.url }}" type="audio/mpeg">
-            <span data-i18n="audio_not_supported">Tu navegador no soporta la reproducción de audio.</span> 
-          </audio>
-        {% else %}
-          <p><a href="{{ archivo.archivo.url }}" target="_blank" data-i18n="download_attachment_link">Descargar archivo adjunto</a></p> 
-        {% endif %}
-      {% endwith %}
+      {% include "blog/includes/post_file.html" with archivo=archivo %}
     {% endfor %}
   </div>
 
   <!-- Comentarios -->
-  <h3 style="margin-top: 40px;" data-i18n="comments_title">Comentarios</h3>  
+  <h3 style="margin-top: 40px;" data-i18n="comments_title">Comentarios</h3>
   {% for comentario in comentarios %}
-  <div class="comentario">
-    <p class="comentario-fecha">{{ comentario.fecha|date:"d M Y H:i" }}</p>
-    <strong>{{ comentario.autor }}</strong>:
-    <span class="comentario-texto">{{ comentario.texto }}</span>
-
-    {% if user.is_authenticated %}
-      <button type="button" class="btn-responder" data-usuario="{{ comentario.autor }}">
-        <span data-i18n="reply_button">Responder</span> 
-      </button>
-    {% endif %}
-  </div>
-{% empty %}
-  <p data-i18n="no_comments">No hay comentarios aún.</p>
-{% endfor %}
-
+    {% include "blog/includes/comment.html" with comentario=comentario %}
+  {% empty %}
+    <p data-i18n="no_comments">No hay comentarios aún.</p>
+  {% endfor %}
 
   <!-- Formulario de comentario -->
   <h3 data-i18n="add_comment_title">Agregar comentario</h3>
@@ -58,36 +31,16 @@
       {% csrf_token %}
       <label for="id_texto" data-i18n="form_label_texto"></label>
       {{ form.as_p }}
-      <button type="submit" class="boton-descarga" data-i18n="publish_button">Publicar</button>  
+      <button type="submit" class="boton-descarga" data-i18n="publish_button">Publicar</button>
     </form>
   {% else %}
     <p>
-      <span data-i18n="login_to_comment">Debes</span> <a href="{% url 'login' %}?next={{ request.path }}" data-i18n="login_link">iniciar sesión</a> <span data-i18n="to_comment">para comentar.</span>  
+      <span data-i18n="login_to_comment">Debes</span>
+      <a href="{% url 'login' %}?next={{ request.path }}" data-i18n="login_link">iniciar sesión</a>
+      <span data-i18n="to_comment">para comentar.</span>
     </p>
   {% endif %}
 </section>
 
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-  const botones = document.querySelectorAll(".btn-responder");
-  const textarea = document.getElementById("id_texto");
-
-  botones.forEach(boton => {
-    boton.addEventListener("click", function() {
-      const usuario = this.getAttribute("data-usuario");
-      if (textarea) {
-        const mention = `@${usuario} `;
-        if (!textarea.value.includes(mention)) {
-          textarea.value = mention + textarea.value;
-        }
-        textarea.focus();
-        textarea.scrollIntoView({ behavior: "smooth", block: "center" });
-      }
-    });
-  });
-});
-</script>
-
 <script src="{% static 'blog/js/comentarios.js' %}"></script>
-
 {% endblock %}

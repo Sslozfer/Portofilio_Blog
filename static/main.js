@@ -508,6 +508,28 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 });
 
+// ========================================
+// BOTON RESPONDER A COMENTARIOS (TEXTAREA CON ID)
+// ========================================
+document.addEventListener("DOMContentLoaded", function() {
+  const botones = document.querySelectorAll(".btn-responder");
+  const textarea = document.getElementById("id_texto");
+
+  botones.forEach(boton => {
+    boton.addEventListener("click", function() {
+      const usuario = this.getAttribute("data-usuario");
+      if (textarea) {
+        const mention = `@${usuario} `;
+        if (!textarea.value.includes(mention)) {
+          textarea.value = mention + textarea.value;
+        }
+        textarea.focus();
+        textarea.scrollIntoView({ behavior: "smooth", block: "center" });
+      }
+    });
+  });
+});
+
 
 // ========================================
 // BOTON DE MENÚ DE USUARIO
@@ -528,3 +550,5 @@ document.addEventListener("DOMContentLoaded", function() {
     });
   }
 });
+
+

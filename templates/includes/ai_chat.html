@@ -1,0 +1,26 @@
+<!-- Boton flotante -->
+<div class="ai-assistant">
+  <button class="ai-toggle-btn" id="toggle-ai-chat">
+    <i class="fas fa-robot"></i>
+  </button>
+</div>
+
+<!-- Ventana de chat -->
+<div class="ai-chat-container" id="ai-chat">
+  <div class="ai-chat-header">
+    <h3><i class="fas fa-robot"></i> <span data-i18n="ai_title">Asistente Virtual</span></h3>
+    <button class="ai-close-btn" id="close-ai-chat">&times;</button>
+  </div>
+
+  <div class="ai-chat-messages" id="ai-messages"></div>
+
+  <div class="ai-chat-input">
+    <textarea id="ai-input"
+              class="ai-input-field"
+              placeholder="Pregúntame sobre Santiago."
+              data-i18n="ai_placeholder"></textarea>
+    <button class="ai-send-btn" id="ai-send">
+      <i class="fas fa-paper-plane"></i>
+    </button>
+  </div>
+</div>
